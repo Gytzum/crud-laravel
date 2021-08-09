@@ -11,7 +11,7 @@ class Employee extends Model
     
     public $fillable = ['name', 'surname', 'project_id'];
 
-    public function project(){
+    public function projects(){
         return $this->belongsTo('App\Models\Project');
     }
 

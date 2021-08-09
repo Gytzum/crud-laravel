@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
-        //
+        return view('employees.index',['employees' => Employee::orderBy('id')->get()]);
     }
 
     /**
@@ -24,7 +24,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $employees = \App\Models\Employee::orderBy('name')->get();
+        $projects = \App\Models\Project::orderBy('name')->get();
+        return view('employees.create', ['employees' => $employees], ['projects' => $projects]);
     }
 
     /**
@@ -35,7 +37,11 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = new Employee();
+        $employee->fill($request->all());
+        $employee->save();
+        return redirect()->route('employee.index');
+    
     }
 
     /**
@@ -57,7 +63,8 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        $projects = \App\Models\Project::orderBy('name')->get();
+        return view('employees.edit', ['employee' => $employee], ['projects' => $projects]);
     }
 
     /**
@@ -69,8 +76,9 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
-    }
+        $employee->fill($request->all());
+        $employee->save();
+        return redirect()->route('employee.index');    }
 
     /**
      * Remove the specified resource from storage.
@@ -80,6 +88,7 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+        return redirect()->route('employee.index');
     }
 }

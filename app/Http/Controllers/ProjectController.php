@@ -14,7 +14,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('projects.index',['projects' => Project::orderBy('id')->get()]);
+        return view('projects.index', ['projects' => Project::orderBy('id')->get()]);
     }
 
     /**
@@ -24,7 +24,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create', ['projects' => Project::orderBy('id')->get()]);
     }
 
     /**
@@ -39,7 +39,6 @@ class ProjectController extends Controller
         $project->fill($request->all());
         $project->save();
         return redirect()->route('project.index');
-    
     }
 
     /**
@@ -60,7 +59,7 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project)
-    {
+    {   $employees = \App\Models\Employee::orderBy('name')->get();
         return view('projects.edit', ['project' => $project]);
     }
 
@@ -73,10 +72,9 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-       $project->fill($request->all());
-       $project->save();
-       return redirect()->route('project.index');
-
+        $project->fill($request->all());
+        $project->save();
+        return redirect()->route('project.index');
     }
 
     /**
@@ -89,6 +87,5 @@ class ProjectController extends Controller
     {
         $project->delete();
         return redirect()->route('project.index');
-
     }
 }

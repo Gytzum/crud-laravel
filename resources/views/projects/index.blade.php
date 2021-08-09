@@ -6,13 +6,24 @@
             <th>#</th>
             <th>Employees</th>
             <th>Projects</th>
+            <th>Description</th>
             <th>Actions</th>
         </tr>
         @foreach ($projects as $project)
         <tr>
             <td>{{ $project->id }}</td>
-            <td>{{ $project->employees }}</td>
+            <td>
+                @foreach($project->employees as $employee)
+                  {{$employee->name.', '}}
+                @endforeach
+            </td>
             <td>{{ $project->name }}</td>
+            <td>{{ $project->description }}</td>
+            <td><form action={{ route('project.destroy', $project->id) }} method="POST">
+                <a class="btn btn-success" href={{ route('project.edit', $project->id) }}>Edit</a>
+                @csrf @method('delete')
+                <input type="submit" class="btn btn-danger" value="Delete"/>
+            </form></td>
         </tr>
         @endforeach
     </table>
