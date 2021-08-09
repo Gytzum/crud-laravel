@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @section('content')
     <div class="card-body container">
+            @if (session('status_success'))
+            <p style="color: green"><b>{{ session('status_success') }}</b></p>
+        @else
+            <p style="color: red"><b>{{ session('status_error') }}</b></p>
+        @endif
+        
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
@@ -25,7 +31,7 @@
                         @endforeach
                     </td>
                     <td>{{ $project->name }}</td>
-                    <td>{{ $project->description }}</td>
+                    <td>{!! $project->description !!}</td>
                     <td>
                         <form action={{ route('project.destroy', $project->id) }} method="POST">
                             <a class="btn btn-success" href={{ route('project.edit', $project->id) }}>Edit</a>

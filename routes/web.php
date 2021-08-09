@@ -19,9 +19,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::resource('employee', App\Http\Controllers\EmployeeController::class);
-Route::resource('project', App\Http\Controllers\ProjectController::class);
+    Route::middleware(['auth'])->group(function () {
+    Route::resource('employee', App\Http\Controllers\EmployeeController::class);
+    Route::resource('project', App\Http\Controllers\ProjectController::class);
+});
 
 
 Route::get('/home', [App\Http\Controllers\EmployeeController::class, 'index']);

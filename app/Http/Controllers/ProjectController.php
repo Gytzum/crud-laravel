@@ -35,10 +35,14 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, ['name' => 'required|unique:projects,name|max:30']);
         $project = new Project();
         $project->fill($request->all());
         $project->save();
-        return redirect()->route('project.index');
+
+        return ($project->save() !==1) ?
+            redirect('/project')->with('status_success', 'Project created!') : 
+            redirect('/project')->with('status_error', 'Project was not created!');
     }
 
     /**
@@ -58,8 +62,8 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
-    {   $employees = \App\Models\Employee::get();
+    public function edit(Project $project){
+        
         return view('projects.edit', ['project' => $project]);
     }
 
@@ -72,9 +76,14 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        
+        $this->validate($request, ['name'   => 'max:30']);
+                    // TODO kad butu galima keisti be pakeitimu bet negalima jei toks egzistuoja. patikrinti ID primityviu budu
+
         $project->fill($request->all());
-        $project->save();
-        return redirect()->route('project.index');
+        return ($project->save() !==1) ?
+            redirect('/project')->with('status_success', 'Project updated!') : 
+            redirect('/project')->with('status_error', 'Project was not updated!');
     }
 
     /**
@@ -85,7 +94,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        $project->delete();
-        return redirect()->route('project.index');
+        return ($project->delete() !==1) ?
+            redirect('/project')->with('status_success', 'Project deleted!') : 
+            redirect('/project')->with('status_error', 'Project was not deleted!');
     }
 }

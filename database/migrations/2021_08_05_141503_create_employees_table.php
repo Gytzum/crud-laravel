@@ -19,9 +19,9 @@ class CreateEmployeesTable extends Migration
             $table->string('surname');
             $table->integer('phone')->length(14)->nullable();
             $table->string('email')->nullable();
-            $table->bigInteger('project_id')->unsigned();
+            $table->bigInteger('project_id')->unsigned()->nullable();
             $table->timestamps();
-            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('set null')->onUpdate('cascade');
         });
     }
 

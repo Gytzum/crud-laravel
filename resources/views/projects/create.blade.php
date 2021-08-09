@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    @if($errors->any())
+        <p style="color: red">{{$errors->first()}}</p>
+    @endif
    <div class="row justify-content-center">
        <div class="col-md-8">
            <div class="card">
@@ -14,10 +17,11 @@
                         </div>
                         <div class="form-group">
                             <label for="">Description: </label>
-                            <textarea style= "height: 300px"type="text" name="description" class="form-control"> </textarea>
+                            <textarea id="mce" style= "height: 300px"type="text" name="description" class="form-control"> </textarea>
                         </div>
 
                        <button type="submit" class="btn btn-dark">Submit</button>
+                       <a class="btn btn-dark" href="{{ URL::previous() }}">Back</a>
                    </form>
                </div>
            </div>

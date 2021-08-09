@@ -35,8 +35,13 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){           
+        $this->validate($request, [
+        'name' => 'required|unique:employees,name|max:30',
+        'surname' => 'required|unique:employees,surname|max:30',
+        'phone' => 'unique:employees,phone|max:14',
+        'email' => 'unique:employees,email|max:30']);
+
         $employee = new Employee();
         $employee->fill($request->all());
         return ($employee->save() !==1) ?
@@ -76,6 +81,14 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
+
+        $this->validate($request, [
+            'name' => 'max:30',
+            'surname' => 'max:30',
+            'phone' => 'max:14',
+            'email' => 'max:30']);
+            // TODO kad butu galima keisti be pakeitimu bet negalima jei toks egzistuoja. patikrinti ID primityviu budu
+
         $employee->fill($request->all());
         return ($employee->save() !==1) ?
             redirect('/employee')->with('status_success', 'Employee updated!') : 

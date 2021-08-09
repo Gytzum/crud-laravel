@@ -6,7 +6,6 @@
     @else
         <p style="color: red"><b>{{ session('status_error') }}</b></p>
     @endif
-
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>

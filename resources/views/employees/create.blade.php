@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    @if($errors->any())
+        <p style="color: red">{{$errors->first()}}</p>
+    @endif
    <div class="row justify-content-center">
        <div class="col-md-8">
            <div class="card">
@@ -34,6 +37,8 @@
                            </select>
                        </div>
                        <button type="submit" class="btn btn-dark">Submit</button>
+                       <a class="btn btn-dark" href="{{ URL::previous() }}">Back</a>
+
                    </form>
                </div>
            </div>
