@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
-        return view('employees.index',['employees' => Employee::orderBy('id')->get()]);
+        return view('employees.index',['employees' => Employee::orderBy('name')->get()]);
     }
 
     /**
@@ -39,9 +39,9 @@ class EmployeeController extends Controller
     {
         $employee = new Employee();
         $employee->fill($request->all());
-        $employee->save();
-        return redirect()->route('employee.index');
-    
+        return ($employee->save() !==1) ?
+            redirect('/employee')->with('status_success', 'Employee created!') : 
+            redirect('/employee')->with('status_error', 'Employee was not created!');
     }
 
     /**
@@ -77,8 +77,11 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $employee->fill($request->all());
-        $employee->save();
-        return redirect()->route('employee.index');    }
+        return ($employee->save() !==1) ?
+            redirect('/employee')->with('status_success', 'Employee updated!') : 
+            redirect('/employee')->with('status_error', 'Employee was not updated!');
+        return redirect()->route('employee.index');    
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -88,7 +91,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        $employee->delete();
-        return redirect()->route('employee.index');
+        return ($employee->delete() !==1) ?
+            redirect('/employee')->with('status_success', 'Employee deleted!') : 
+            redirect('/employee')->with('status_error', 'Employee was not deleted!');
     }
 }

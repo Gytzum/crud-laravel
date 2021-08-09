@@ -24,4 +24,4 @@ Route::resource('employee', App\Http\Controllers\EmployeeController::class);
 Route::resource('project', App\Http\Controllers\ProjectController::class);
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\EmployeeController::class, 'index']);

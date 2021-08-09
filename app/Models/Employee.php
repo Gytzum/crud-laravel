@@ -9,7 +9,7 @@ class Employee extends Model
 {
     use HasFactory;
     
-    public $fillable = ['name', 'surname', 'project_id'];
+    public $fillable = ['name', 'surname', 'phone', 'email', 'project_id'];
 
     public function projects(){
         return $this->belongsTo('App\Models\Project');

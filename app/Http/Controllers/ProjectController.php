@@ -59,7 +59,7 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project)
-    {   $employees = \App\Models\Employee::orderBy('name')->get();
+    {   $employees = \App\Models\Employee::get();
         return view('projects.edit', ['project' => $project]);
     }
 
