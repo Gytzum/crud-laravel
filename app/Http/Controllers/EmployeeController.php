@@ -67,8 +67,9 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(Request $request, Employee $employee)
     {
+            
         $projects = \App\Models\Project::orderBy('name')->get();
         return view('employees.edit', ['employee' => $employee], ['projects' => $projects]);
     }
@@ -82,12 +83,12 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-
-        // $this->validate($request, [
-        //     "name" => "required|max:30",
-        //     "surname" => "required|max:30",
-        //     "phone" => 'required|unique:employees,phone,'.$employee->id|"max:14",
-        //     "email" => 'required|unique:employees,email,'.$employee->id|"max:30"]);
+        $this->validate($request, [
+            'name' => 'required|max:30',
+            'surname' => 'required|max:30',
+            'phone' => 'max:14',
+            'email' => 'max:30']);
+    
 
         $employee->fill($request->all());
         return ($employee->save() !==1) ?

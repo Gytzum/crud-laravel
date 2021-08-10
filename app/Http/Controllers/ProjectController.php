@@ -35,7 +35,9 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name' => 'required|unique:projects,name|max:30']);
+        $this->validate($request, [
+            'name' => 'required|unique:projects,name|max:30',
+            'description' =>  'max:255']);
         $project = new Project();
         $project->fill($request->all());
         $project->save();
@@ -76,11 +78,10 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        
-        $this->validate($request, [
-            "name" => 'required|unique:projects,name,'.$project->id
-        ]);
 
+        $this->validate($request, [
+            'name' => 'required|max:30'.$project->id,
+            'description' =>  'max:255']);
         $project->fill($request->all());
         return ($project->save() !==1) ?
             redirect('/project')->with('status_success', 'Project updated!') : 
