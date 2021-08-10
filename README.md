@@ -28,8 +28,8 @@
 ## Installation
 * Clone repository to AMPPS or XAMPPS root folder 
 * Create a new Database
-* Rename .env.example to .env and fill info about your database name, username, password etc.
 * Open your (IDE) application and open cloned application
+* Rename .env.example to .env and fill info about your database name, username, password etc.
 * Install Composer if you don't have one [Click here to install](https://getcomposer.org/doc/00-intro.md#installation-windows)
 * Find your Composter with code below: 
 ``` 
