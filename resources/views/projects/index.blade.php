@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
     <div class="card-body container">
-            @if (session('status_success'))
+        @if (session('status_success'))
             <p style="color: green"><b>{{ session('status_success') }}</b></p>
         @else
             <p style="color: red"><b>{{ session('status_error') }}</b></p>
         @endif
-        
+
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
@@ -14,7 +14,10 @@
                     <th>Employees</th>
                     <th>Projects</th>
                     <th>Description</th>
-                    <th>Actions</th>
+                    @if (Auth::user()->id === 1)
+                        <th>Actions</th>
+                    @else <th>Details</th>
+                    @endif
                 </tr>
             </thead>
             <?php $count = 1; ?>
@@ -33,19 +36,23 @@
                     <td>{{ $project->name }}</td>
                     <td>{!! $project->description !!}</td>
                     <td>
-                    @if(Auth::user()->id===1)
-                        <form action={{ route('project.destroy', $project->id) }} method="POST">
-                            <a class="btn btn-success" href={{ route('project.edit', $project->id) }}>Edit</a>
-                            @csrf @method('delete')
-                            <input type="submit" class="btn btn-danger" value="Delete" />
-                        </form>
-                    @endif    
+                        @if (Auth::user()->id === 1)
+                            <form action={{ route('project.destroy', $project->id) }} method="POST">
+                                <a class="btn btn-success" href={{ route('project.edit', $project->id) }}>Edit</a>
+                                @csrf @method('delete')
+                                <input type="submit" class="btn btn-danger" value="Delete" />
+                            </form>
+                        @else
+                            <form action={{ route('project.show', $project->id) }} method="POST">
+                                <a class="btn btn-success" href={{ route('project.show', $project->id) }}>Show More</a>
+                            </form>
                     </td>
-                </tr>
+                        @endif
+            </tr>
             @endforeach
         </table>
         <div>
-            @if(Auth::user()->id===1)
+            @if (Auth::user()->id === 1)
                 <a href="{{ route('project.create') }}" class="btn btn-success">Create</a>
             @endif
         </div>

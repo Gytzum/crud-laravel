@@ -20,9 +20,12 @@ Route::get('/', function () {
 
 Auth::routes();
     Route::middleware(['auth'])->group(function () {
+    Route::post('employee/{id}/show', [App\Http\Controllers\EmployeeController::class, 'show'])->name('employee.show');
+    Route::post('project/{id}/show', [App\Http\Controllers\ProjectController::class, 'show'])->name('project.show');
+    Route::post('project/{id}/edit', [App\Http\Controllers\ProjectController::class, 'edit'])->name('project.edit');
+
     Route::resource('employee', App\Http\Controllers\EmployeeController::class);
     Route::resource('project', App\Http\Controllers\ProjectController::class);
-    Route::get('project/{id}/edit', [App\Http\Controllers\CustomerController::class, 'edit'])->name('project.edit');
 });
 
 

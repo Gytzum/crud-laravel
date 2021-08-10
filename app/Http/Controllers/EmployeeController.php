@@ -57,7 +57,8 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        $projects = \App\Models\Project::orderBy('name')->get();
+        return view('employees.show', ['employee' => $employee], ['projects' => $projects]);
     }
 
     /**

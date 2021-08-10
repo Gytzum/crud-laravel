@@ -12,7 +12,10 @@
                     <th>#</th>
                     <th>Employees</th>
                     <th>Contacts</th>
-                    <th>Actions</th>
+                    @if(Auth::user()->id===1)
+                        <th>Actions</th> 
+                    @else <th>Details</th>  
+                    @endif
                 </tr>
             </thead>
             <?php $count =1; ?>
@@ -32,7 +35,11 @@
                             @csrf @method('delete')
                             <input type="submit" class="btn btn-danger" value="Delete" />
                         </form>
-                        @endif
+                        @else
+                        <form action={{ route('employee.show', $employee->id) }} method="POST">
+                            <a class="btn btn-success" href={{ route('employee.show', $employee->id) }}>Show More</a>
+                        </form>
+                         @endif
                     </td>
                 </tr>
             @endforeach

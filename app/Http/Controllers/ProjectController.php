@@ -53,7 +53,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('projects.show', ['project' => $project]);
+        
     }
 
     /**
@@ -63,7 +64,6 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project){
-        
         return view('projects.edit', ['project' => $project]);
     }
 
