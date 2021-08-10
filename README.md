@@ -31,7 +31,7 @@
     * servername -> localhost  
     * username -> root  
     * password -> mysql  
-
+* Create scheme in mysql workbech: crud_laravel
 * Open your (IDE) application and open cloned application
 * Install Composer if you don't have one [Click here to install](https://getcomposer.org/doc/00-intro.md#installation-windows)
 * Copy this code to terminal and create scheme tables and insert admin user into database
