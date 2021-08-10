@@ -1,9 +1,9 @@
-# PHP CRUD APPLICATION
+# Laravel CRUD APPLICATION
 ![CSS-CODE](https://img.shields.io/badge/CSS-CODE-orange)
 ![HTML-CODE](https://img.shields.io/badge/HTML-CODE-blue)
 ![PHP-CODE](https://img.shields.io/badge/PHP-CODE-9cf)
 ![MYSQL-CODE](https://img.shields.io/badge/MYSQL-CODE-yellow)
-![ORM-CODE](https://img.shields.io/badge/ORM-CODE-blueviolet)
+![Laracel-CODE](https://img.shields.io/badge/LARAVEL-CODE-blueviolet)
 
 ## This is my fifth project built with Laravel framework.
 
