@@ -22,6 +22,7 @@ Auth::routes();
     Route::middleware(['auth'])->group(function () {
     Route::resource('employee', App\Http\Controllers\EmployeeController::class);
     Route::resource('project', App\Http\Controllers\ProjectController::class);
+    Route::get('project/{id}/edit', [App\Http\Controllers\CustomerController::class, 'edit'])->name('project.edit');
 });
 
 

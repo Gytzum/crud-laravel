@@ -14,7 +14,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('projects.index', ['projects' => Project::orderBy('id')->get()]);
+        return view('projects.index', ['projects' => Project::orderBy('name')->get()]);
     }
 
     /**
@@ -24,7 +24,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create', ['projects' => Project::orderBy('id')->get()]);
+        return view('projects.create', ['projects' => Project::orderBy('name')->get()]);
     }
 
     /**
@@ -77,8 +77,9 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         
-        $this->validate($request, ['name'   => 'max:30']);
-                    // TODO kad butu galima keisti be pakeitimu bet negalima jei toks egzistuoja. patikrinti ID primityviu budu
+        $this->validate($request, [
+            "name" => 'required|unique:projects,name,'.$project->id
+        ]);
 
         $project->fill($request->all());
         return ($project->save() !==1) ?

@@ -82,12 +82,11 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
 
-        $this->validate($request, [
-            'name' => 'max:30',
-            'surname' => 'max:30',
-            'phone' => 'max:14',
-            'email' => 'max:30']);
-            // TODO kad butu galima keisti be pakeitimu bet negalima jei toks egzistuoja. patikrinti ID primityviu budu
+        // $this->validate($request, [
+        //     "name" => "required|max:30",
+        //     "surname" => "required|max:30",
+        //     "phone" => 'required|unique:employees,phone,'.$employee->id|"max:14",
+        //     "email" => 'required|unique:employees,email,'.$employee->id|"max:30"]);
 
         $employee->fill($request->all());
         return ($employee->save() !==1) ?

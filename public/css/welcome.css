@@ -1,0 +1,35 @@
+.welcome{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    height: 500px;
+    width: 450px;
+    background: linear-gradient(45deg, #ddd, #343A40);
+    color: #fff;
+    border-radius: 20px;
+    box-shadow: 5px 10px 10px #ddd;
+}
+.welcome-ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.welcome-btn{
+    display: inline-block;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #343A40;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.welcome-btn:hover{
+    text-decoration: none;
+    color:#111111;
+}
