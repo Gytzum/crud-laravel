@@ -27,13 +27,19 @@
 
 ## Installation
 * Clone repository to AMPPS or XAMPPS root folder 
-* Create MySQL Connection with following information :
-    * servername -> localhost  
-    * username -> root  
-    * password -> mysql  
-* Create scheme in mysql workbech: crud_laravel
+* Create a new Database
+* Rename .env.example to .env and fill info about your database name, username, password etc.
 * Open your (IDE) application and open cloned application
 * Install Composer if you don't have one [Click here to install](https://getcomposer.org/doc/00-intro.md#installation-windows)
+* Find your Composter with code below: 
+``` 
+php ../composer.phar require laravel/ui
+```
+* Set application key(generate) if doesn't work use code below(clear) :
+```
+php artisan key:generate
+php artisan config:clear
+```
 * Copy this code to terminal and create scheme tables and insert admin user into database
 ```
 php artisan migrate:refresh --seed  
