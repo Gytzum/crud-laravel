@@ -26,17 +26,21 @@
                         {!! nl2br(e($contacts))!!}
                     </td>
                     <td>
+                        @if(Auth::user()->id===1)
                         <form action={{ route('employee.destroy', $employee->id) }} method="POST">
                             <a class="btn btn-success" href={{ route('employee.edit', $employee->id) }}>Edit</a>
                             @csrf @method('delete')
                             <input type="submit" class="btn btn-danger" value="Delete" />
                         </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach
         </table>
         <div>
+            @if(Auth::user()->id===1)
             <a href="{{ route('employee.create') }}" class="btn btn-success">Create</a>
+            @endif
         </div>
     </div>
 @endsection

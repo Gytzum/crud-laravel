@@ -33,17 +33,21 @@
                     <td>{{ $project->name }}</td>
                     <td>{!! $project->description !!}</td>
                     <td>
+                    @if(Auth::user()->id===1)
                         <form action={{ route('project.destroy', $project->id) }} method="POST">
                             <a class="btn btn-success" href={{ route('project.edit', $project->id) }}>Edit</a>
                             @csrf @method('delete')
                             <input type="submit" class="btn btn-danger" value="Delete" />
                         </form>
+                    @endif    
                     </td>
                 </tr>
             @endforeach
         </table>
         <div>
-            <a href="{{ route('project.create') }}" class="btn btn-success">Create</a>
+            @if(Auth::user()->id===1)
+                <a href="{{ route('project.create') }}" class="btn btn-success">Create</a>
+            @endif
         </div>
     </div>
 @endsection
